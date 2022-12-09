@@ -65,6 +65,8 @@ if (empty($_SESSION['jogoRodando'])) {
     $_SESSION['markedBombs'] = 0;
     $_SESSION['tabela'] = [];
 
+    $_COOKIE['microseconds'] = 0;
+    $_COOKIE['miliseconds'] = 0;
     $_COOKIE['seconds'] = "00";
     $_COOKIE['minutes'] = "00";
     $_COOKIE['hours'] = "00";
@@ -98,6 +100,8 @@ if (empty($_SESSION['jogoRodando'])) {
             $_SESSION['jogoRodando'] = true;
             $_SESSION['status'] = "jogando";
 
+            setcookie("microseconds", 0);
+            setcookie("miliseconds", 0);
             setcookie("seconds", "00");
             setcookie("minutes", "00");
             setcookie("hours", "00");
@@ -430,7 +434,19 @@ if (empty($_SESSION['jogoRodando'])) {
             let hours = getCookie('hours') || "00";
             let minutes = getCookie('minutes') || "00";
             let seconds = getCookie('seconds') || "00";
-            seconds++;
+            let miliseconds = getCookie('miliseconds');
+            let microseconds = getCookie('microseconds');
+
+            microseconds += 1;
+
+            if (microseconds >= 1000) {
+                microseconds = 0;
+                miliseconds++;
+            }
+            if (miliseconds >= 60) {
+                miliseconds = 0;
+                seconds++;
+            }
             if (seconds >= 60) {
                 seconds = 0;
                 minutes++;
@@ -439,20 +455,21 @@ if (empty($_SESSION['jogoRodando'])) {
                 minutes = 0;
                 hours++;
             }
+            if (String(miliseconds).length === 1) {
+                miliseconds = `0${miliseconds}`
+            }
             if (String(seconds).length === 1) {
                 seconds = `0${seconds}`
             }
             if (String(minutes).length === 1) {
                 minutes = `0${minutes}`
             }
-            if (String(hours).length === 1) {
-                hours = `0${hours}`
-            }
-            document.cookie = `hours=${hours}`;
             document.cookie = `minutes=${minutes}`;
             document.cookie = `seconds=${seconds}`;
+            document.cookie = `miliseconds=${miliseconds}`;
+            document.cookie = `microseconds=${microseconds}`;
             document.querySelector('.timer').innerHTML = `${hours}:${minutes}:${seconds}`;
-        }, 1000);
+        }, 1);
     }
     document.addEventListener('contextmenu', (e) => {
         e.preventDefault();

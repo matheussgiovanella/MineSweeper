@@ -65,9 +65,9 @@ if (empty($_SESSION['jogoRodando'])) {
     $_SESSION['markedBombs'] = 0;
     $_SESSION['tabela'] = [];
 
-    $_COOKIE['seconds'] = 0;
-    $_COOKIE['minutes'] = 0;
-    $_COOKIE['hours'] = 0;
+    $_COOKIE['seconds'] = "00";
+    $_COOKIE['minutes'] = "00";
+    $_COOKIE['hours'] = "00";
 }
 
 ?>

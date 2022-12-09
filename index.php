@@ -65,9 +65,9 @@ if (empty($_SESSION['jogoRodando'])) {
     $_SESSION['markedBombs'] = 0;
     $_SESSION['tabela'] = [];
 
-    setcookie("seconds", "00");
-    setcookie("minutes", "00");
-    setcookie("hours", "00");
+    $_COOKIE['seconds'] = 0;
+    $_COOKIE['minutes'] = 0;
+    $_COOKIE['hours'] = 0;
 }
 
 ?>
@@ -352,17 +352,17 @@ if (empty($_SESSION['jogoRodando'])) {
 
             <div class="input-container">
                 <label class="label" for="linhas">Linhas</label>
-                <input class="input" min="0" type="number" name="linhas" id="linhas" value="<?php echo $_SESSION['numLinhas'] ?>" />
+                <input class="input" min="1" type="number" name="linhas" id="linhas" value="<?php echo $_SESSION['numLinhas'] ?>" />
             </div>
 
             <div class="input-container">
                 <label class="label" for="colunas">Colunas</label>
-                <input class="input" min="0" type="number" name="colunas" id="colunas" value="<?php echo $_SESSION['numColunas'] ?>" />
+                <input class="input" min="1" type="number" name="colunas" id="colunas" value="<?php echo $_SESSION['numColunas'] ?>" />
             </div>
 
             <div class="input-container">
                 <label class="label" for="bombas">Bombas</label>
-                <input class="input" min="0" type="number" name="bombas" id="bombas" value="<?php echo $_SESSION['numBombas'] ?>" />
+                <input class="input" min="1" type="number" name="bombas" id="bombas" value="<?php echo $_SESSION['numBombas'] ?>" />
             </div>
         </form>
         <?php
@@ -407,7 +407,7 @@ if (empty($_SESSION['jogoRodando'])) {
                         $_SESSION['tabela'][$y][$x]->question = !$_SESSION['tabela'][$y][$x]->question;
                     }
                 }
-                echo "<script>window.location.reload()</script>";
+                header("Location: " . $_SERVER['PHP_SELF']);
             }
             mostrarTabuleiro($_SESSION['tabela']);
         }
@@ -469,6 +469,7 @@ if (empty($_SESSION['jogoRodando'])) {
                 document.cookie = `click=${e.target.value}`;
                 document.cookie = `rclick=${e.target.value}`;
                 window.location.reload();
+                window.document.forms[0].submit();
             });
         }
     }

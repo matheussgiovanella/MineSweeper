@@ -469,7 +469,6 @@ if (empty($_SESSION['jogoRodando'])) {
                 document.cookie = `click=${e.target.value}`;
                 document.cookie = `rclick=${e.target.value}`;
                 window.location.reload();
-                window.document.forms[0].submit();
             });
         }
     }

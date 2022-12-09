@@ -34,6 +34,8 @@ button {
     width: 100%;
     overflow-y: scroll;
     overflow-x: scroll;
+    scrollbar-color: #555 transparent;
+    scrollbar-width: thin;
 }
 
 .tableContainer::-webkit-scrollbar {
@@ -248,7 +250,12 @@ table {
 
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
-    display: none;
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
 }
 
 .info {

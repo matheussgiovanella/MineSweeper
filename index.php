@@ -64,6 +64,10 @@ if (empty($_SESSION['jogoRodando'])) {
     $_SESSION['numBombas'] = 0;
     $_SESSION['markedBombs'] = 0;
     $_SESSION['tabela'] = [];
+
+    setcookie("seconds", "00");
+    setcookie("minutes", "00");
+    setcookie("hours", "00");
 }
 
 ?>
@@ -343,23 +347,22 @@ if (empty($_SESSION['jogoRodando'])) {
         </form>
         <form class="form" method="post">
             <div class="input-container">
-                <input class="input" type="submit" value="<?php if ($_SESSION['jogoRodando']) echo "Recomeçar";
-                                                            else echo "Começar"; ?>" />
+                <input class="input" type="submit" value="<?php if ($_SESSION['jogoRodando']) echo "Recomeçar"; else echo "Começar"; ?>" />
             </div>
 
             <div class="input-container">
                 <label class="label" for="linhas">Linhas</label>
-                <input class="input" type="number" name="linhas" id="linhas" value="<?php echo $_SESSION['numLinhas'] ?>" />
+                <input class="input" min="0" type="number" name="linhas" id="linhas" value="<?php echo $_SESSION['numLinhas'] ?>" />
             </div>
 
             <div class="input-container">
                 <label class="label" for="colunas">Colunas</label>
-                <input class="input" type="number" name="colunas" id="colunas" value="<?php echo $_SESSION['numColunas'] ?>" />
+                <input class="input" min="0" type="number" name="colunas" id="colunas" value="<?php echo $_SESSION['numColunas'] ?>" />
             </div>
 
             <div class="input-container">
                 <label class="label" for="bombas">Bombas</label>
-                <input class="input" type="number" name="bombas" id="bombas" value="<?php echo $_SESSION['numBombas'] ?>" />
+                <input class="input" min="0" type="number" name="bombas" id="bombas" value="<?php echo $_SESSION['numBombas'] ?>" />
             </div>
         </form>
         <?php
